@@ -5,7 +5,7 @@ services:
     volumes:
       - .:/app
 
-  phpdx: # will use image created by the local Dockerfile
+  supervisor: # will use image created by the local Dockerfile
     build: .
     volumes:
      - .:/app

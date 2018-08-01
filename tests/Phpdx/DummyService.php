@@ -2,7 +2,7 @@
 
 namespace Phpdx\Tests;
 
-class DummyObject
+class DummyService
 {
 
     public function __call($method, $arguments) {

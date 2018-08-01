@@ -14,13 +14,14 @@ class ListenerTests extends \PHPUnit_Framework_TestCase {
         // replace the Redis service with a dummy
         $reflectionProperty = $reflectionClass->getProperty('redisFactoryClass');
         $reflectionProperty->setAccessible(true);
-        $reflectionProperty->setValue($mock, 'Phpdx\\Tests\\DummyObject');
+        $reflectionProperty->setValue($mock, 'Phpdx\\Tests\\DummyService');
 
-        // call buildRecord on the listener mock
+        // create a commands object
         $commands = (object) [
             'confirmationCode' => 'ca1eb2',
         ];
 
+        // invoke the job and assert the results
         $reflectionMethod = $reflectionClass->getMethod('processWebPost');
         $reflectionMethod->setAccessible(true);
         $result = $reflectionMethod->invoke($mock, $commands);
