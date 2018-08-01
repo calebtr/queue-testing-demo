@@ -1,0 +1,27 @@
+{
+    "name": "phpdx/queue-testing-demo",
+    "require": {
+        "php": "~7.1",
+        "php-amqplib/php-amqplib": ">=2.6.1",
+        "vlucas/phpdotenv": "^2.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.7.*"
+    },
+    "authors": [
+        {
+            "name": "Caleb Tucker-Raymond",
+            "email": "caleb@radikosoft.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Phpdx\\": "src/Phpdx"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Phpdx\\Tests\\": "tests/Phpdx"
+        }
+    }
+}
