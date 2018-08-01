@@ -3,6 +3,7 @@
     "require": {
         "php": "~7.1",
         "php-amqplib/php-amqplib": ">=2.6.1",
+        "predis/predis": ">=1.1",
         "vlucas/phpdotenv": "^2.4"
     },
     "require-dev": {

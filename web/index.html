@@ -2,9 +2,93 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Post</title>
 </head>
 <body>
+
+
+<form method="post" action="post.php">
+
+    <input type="hidden" name="key" value="valid">
+
+    <button id="button" type="button" name="post">Post</button>
+
+</form>
+
+<span id="progress"></span>
+
+<script>
+    (function() {
+        var httpRequest;
+        document.getElementById("button").addEventListener('click', makeRequest);
+
+        function makeRequest() {
+
+            httpRequest = new XMLHttpRequest();
+
+            if (!httpRequest) {
+                alert('Giving up :( Cannot create an XMLHTTP instance');
+                return false;
+            }
+            httpRequest.onreadystatechange = postResponse;
+            httpRequest.open('POST', 'post.php');
+
+            var formElement = document.querySelector("form");
+            httpRequest.send(new FormData(formElement));
+
+        }
+
+        function postResponse() {
+            if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+                    window.id = httpRequest.responseText;
+                    pollForUpdate();
+                } else {
+                    alert('There was a problem with the request.');
+                }
+            }
+        }
+
+        function pollForUpdate() {
+            var progressElement = document.getElementById('progress');
+            progressElement.innerHTML += '.';
+
+            var formElement = document.querySelector("form");
+            formData = new FormData(formElement);
+            formData.append('id', id);
+
+            httpRequest = new XMLHttpRequest();
+
+            if (!httpRequest) {
+                alert('Giving up :( Cannot create an XMLHTTP instance');
+                return false;
+            }
+
+            httpRequest.onreadystatechange = pollResponse;
+            httpRequest.open('POST', 'callback.php');
+            httpRequest.send(formData);
+
+        }
+
+        function pollResponse() {
+            if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+                    if (httpRequest.responseText === 'complete') {
+                        var progressElement = document.getElementById('progress');
+                        progressElement.innerHTML = 'Complete!';
+                    }
+                    else {
+                        window.setTimeout(function() { pollForUpdate() }, 1);
+                    }
+                } else {
+                    alert('There was a problem with the request.');
+                }
+            }
+        }
+
+    })();
+</script>
+
 
 </body>
 </html>

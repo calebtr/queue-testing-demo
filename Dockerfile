@@ -10,6 +10,7 @@ RUN ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 # download PHP
+RUN apt-get update
 RUN apt-get install software-properties-common -y
 RUN apt update
 RUN add-apt-repository ppa:ondrej/php

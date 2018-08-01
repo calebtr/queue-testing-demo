@@ -1,6 +1,6 @@
 <?php
 
-namespace Radiko;
+namespace Phpdx;
 
 class Listener {
 
@@ -14,7 +14,7 @@ class Listener {
 
         $connection     = RabbitMQConnectionFactory::getConnection();
         $this->channel = $connection->channel();
-        $this->channel->queue_declare( $this->queue, false, true, false, false );
+        $this->channel->queue_declare( $this->queue, false, true, false, true );
 
         $callback = function ( $msg ) {
             $result = $this->processJob( $msg );

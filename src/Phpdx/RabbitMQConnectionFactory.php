@@ -3,9 +3,9 @@
 namespace Phpdx;
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
-use Dotenv;
+use Dotenv\Dotenv;
 
-class RadikoRabbitMQ {
+class RabbitMQConnectionFactory {
 
     /**
      * @return \PhpAmqpLib\Connection\AMQPStreamConnection
