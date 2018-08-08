@@ -8,7 +8,13 @@ class Job {
 
     protected $queue;
 
-    public function __construct($body, $queue = '') {
+    /**
+     * Job constructor.
+     * @param \stdClass $body
+     * @param string $queue
+     * @throws \Exception
+     */
+    public function __construct(\stdClass $body, $queue = '') {
 
         if ($queue) {
             $this->queue = $queue;
